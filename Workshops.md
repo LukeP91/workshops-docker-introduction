@@ -13,10 +13,10 @@
 - Tell me if I need to repeat something or when I am going to fast
 - Ask questions
 
-## Docker what is it?
+## Docker introduction
 
-- What is it
-- What problems it tries to solve
+- What is it?
+- What problems it tries to solve?
 - vm vs container
 - Dockerfile vs docker image vs docker container
 - hub.docker.com
@@ -41,7 +41,7 @@ docker run --env HELLO="sup guys" --name web -p 4567:4567 -d workshops-sample-ap
 # how to build image
 docker build
 
-# how to run non default dockerfile
+# how to build non default dockerfile
 docker build -f ./Dockerfile.development
 
 # how to run build without cache
@@ -51,9 +51,53 @@ docker build --no-cache
 docker build --tag
 
 # how to pass args to build
-docker build --build-arg
+docker build -t workshops-app -f development.Dockerfile --build-arg MESSAGE="MESSAGE" .
+docker run -p 4567:4567 workshops-app
 
-docker push
+# docker push
+# docker pull
+
+# How to clean leftovers
+
+docker image rm name.../ docker rmi name...
+
+docker image prune # cleans up dangling images. A dangling image is one that is not tagged and is not referenced by any container.
+
+docker image prune -a # remove all images which are not used by existing containers
+
+docker container rm CONTAINER ID.../ docker rm CONTAINER ID...# removes one or more containers
+docker container prune # Remove all stopped containers
+
+# how to list images
+
+docker ps # List currently running docker containers:
+
+docker ps --all # List all docker containers (running and stopped)
+
+# how to copy files to the container and from container
+
+docker container cp SOURCE_PATH CONTAINER:SRC_PATH # copies host's source path to given container's source path
+
+docker container cp CONTAINER:SRC_PATH SOURCE_PATH # copies given container's source path to host's source path
+
+Can be shortend with
+
+docker cp
+
+# Run a command in a running container
+
+docker exec CONTAINER ID ls # run a command in a running container
+docker exec CONTAINER ID bash
+
+
+docker -i CONTAINER ID bash # run a command and keeps STDIN open
+docker -i -t CONTAINER ID bash # allocates pseudo-TTY
+
+# how to restart a container
+
+docker container restart CONTAINER ID
+
+
 
 - docker pull
 - docker run
