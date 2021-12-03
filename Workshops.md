@@ -13,44 +13,64 @@
 - Tell me if I need to repeat something or when I am going to fast
 - Ask questions
 
-## Docker introduction
+## Docker - what is it?
 
-- What is it?
-- What problems it tries to solve?
-- vm vs container
-- Dockerfile vs docker image vs docker container
+
+## What problems it tries to solve?
+## VM vs Container
+## Dockerfile vs Docker image vs Docker container
+### Dockerfile
+- a receipe which tells docker how to build an image
+
+### Docker image
+
+- read-only template
+- contains layers of libraires, packages and source code
+- can be shared in public/private registry
+
+### Docker container
+
+- instance of a docker container
+- adds writable layer to the docker image
+- more than one container can be created from an image
+
+## Docker Hub
+
+- think like Github for docker images
+- place to share container docker images
+- docker pull get's an image from here by default
 - hub.docker.com
 
 ## Basic commands
 
-# how to run image
+### how to run image
 docker run workshops-sample-app
 
-# how to bind port
+### how to bind port
 docker run -p 4567:4567 workshops-sample-app
 
-# how to give name to the container
+### how to give name to the container
 docker run --name web -p 4567:4567 workshops-sample-app
 
-# how to pass env
+### how to pass env
 docker run --env HELLO="sup guys" --name web -p 4567:4567 workshops-sample-app
 
-# how to run detached container
+### how to run detached container
 docker run --env HELLO="sup guys" --name web -p 4567:4567 -d workshops-sample-app
 
-# how to build image
+### how to build image
 docker build
 
-# how to build non default dockerfile
+### how to build non default dockerfile
 docker build -f ./Dockerfile.development
 
-# how to run build without cache
+### how to run build without cache
 docker build --no-cache
 
-# how to tag build
+### how to tag build
 docker build --tag
 
-# how to pass args to build
+### how to pass args to build
 docker build -t workshops-app -f development.Dockerfile --build-arg MESSAGE="MESSAGE" .
 docker run -p 4567:4567 workshops-app
 
