@@ -94,12 +94,14 @@ docker run --name web -p 4567:4567 workshops-sample-app
 ------
 ### how to pass env
 ```bash
-docker run --env HELLO="sup guys" -p 4567:4567 workshops-sample-app
+docker run --env HELLO="sup guys" \
+  -p 4567:4567 workshops-sample-app
 ```
 ------
 ### how to run detached container
 ```bash
-docker run --env HELLO="sup guys" -p 4567:4567 -d workshops-sample-app
+docker run --env HELLO="sup guys" \
+  -p 4567:4567 -d workshops-sample-app
 ```
 ------
 ### how to list images
@@ -112,11 +114,14 @@ docker ps --all
 ------
 ### How to clean leftovers
 ```bash
-docker image rm name.../ docker rmi name...
+# removes image
+docker image rm name...
+docker rmi name...
 # cleans up dangling images.
 docker image prune
 # removes one or more containers
-docker container rm CONTAINER ID.../ docker rm CONTAINER ID...
+docker container rm CONTAINER_ID...
+docker rm CONTAINER_ID...
 # Remove all stopped containers
 docker container prune
 ```
@@ -134,17 +139,17 @@ docker cp
 ### Run a command in a running container
 ```bash
 # run a command in a running container
-docker exec CONTAINER ID ls
-docker exec CONTAINER ID bash
+docker exec CONTAINER_ID ls
+docker exec CONTAINER_ID bash
 # run a command and keeps STDIN open
-docker -i CONTAINER ID bash
+docker -i CONTAINER_ID bash
 # allocates pseudo-TTY
-docker -i -t CONTAINER ID bash
+docker -i -t CONTAINER_ID bash
 ```
 ------
 ### how to restart a container
 ```bash
-docker container restart CONTAINER ID
+docker container restart CONTAINER_ID
 ```
 ------
 ## Docker-compose
@@ -171,20 +176,22 @@ docker compose rm
 ------
 ### leftover running containers
 ```bash
-# Remove containers for services not defined in the Compose file.
-docker compose up/down ----remove-orphans
+# Remove containers for services
+# not defined in the Compose file.
+docker compose up/down --remove-orphans
 ```
 ------
 ### old images
 ```bash
-# remove all images which are not used by existing containers
+# remove all images which are
+#not used by existing containers
 docker image prune -a
 ```
 ------
 ## Useful aliases
-*For some of them FZF is required and I highly recommend installing it*
+*For some of them FZF is required highly recommend installing it*
 ------
-```shell
+```bash
 # list running containers and runs sh for the selected one
 alias dsh='docker exec -it $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  ) sh'
 # list running containers and runs bash for the selected one
