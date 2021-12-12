@@ -12,10 +12,21 @@
 - Ask questions
 ------
 ## Docker - what is it?
+- CLI tool
+- company
+- containerization platform that simplifies the building, shipment, and running application.
 ------
 ## What problems it tries to solve?
+- consistent development environment for entire team
+- minimize the differecens between local and production environments
+- environment is isolated from developer’s OS and other tools
 ------
 ## VM vs Container
+------
+###
+![vm](https://nickjanetakis.com/assets/blog/virtual-machine-architecture-e6bcc9d42a12a12da38e92ba5a7ddef21e6bda269abc580a84ece64ac189d2b2.jpg)
+------
+![docker](https://nickjanetakis.com/assets/blog/docker-architecture-2cf6d2f4a7d8f04df5576d06c46f02435d8fae339063f58a621a42f24255602a.jpg)
 ------
 ## Dockerfile vs Docker image vs Docker container
 ------
@@ -39,31 +50,6 @@
 - hub.docker.com
 ------
 ## Basic commands
-------
-### how to run image
-```bash
-docker run workshops-sample-app
-```
-------
-### how to bind port
-```bash
-docker run -p 4567:4567 workshops-sample-app
-```
-------
-### how to give name to the container
-```bash
-docker run --name web -p 4567:4567 workshops-sample-app
-```
-------
-### how to pass env
-```bash
-docker run --env HELLO="sup guys" --name web -p 4567:4567 workshops-sample-app
-```
-------
-### how to run detached container
-```bash
-docker run --env HELLO="sup guys" --name web -p 4567:4567 -d workshops-sample-app
-```
 ------
 ### how to build image
 ```bash
@@ -89,12 +75,40 @@ docker build --tag
 ```bash
 docker build -t workshops-app -f development.Dockerfile \
   --build-arg MESSAGE="MESSAGE" .
-docker run -p 4567:4567 workshops-app
 ```
 ------
-### docker push
+### how to run image
+```bash
+docker run workshops-sample-app
+```
 ------
-### docker pull
+### how to bind port
+```bash
+docker run -p 4567:4567 workshops-sample-app
+```
+------
+### how to give name to the container
+```bash
+docker run --name web -p 4567:4567 workshops-sample-app
+```
+------
+### how to pass env
+```bash
+docker run --env HELLO="sup guys" -p 4567:4567 workshops-sample-app
+```
+------
+### how to run detached container
+```bash
+docker run --env HELLO="sup guys" -p 4567:4567 -d workshops-sample-app
+```
+------
+### how to list images
+```bash
+# List currently running docker containers:
+docker ps
+# List all docker containers (running and stopped)
+docker ps --all
+```
 ------
 ### How to clean leftovers
 ```bash
@@ -105,14 +119,6 @@ docker image prune
 docker container rm CONTAINER ID.../ docker rm CONTAINER ID...
 # Remove all stopped containers
 docker container prune
-```
-------
-### how to list images
-```bash
-# List currently running docker containers:
-docker ps
-# List all docker containers (running and stopped)
-docker ps --all
 ```
 ------
 ### how to copy files to the container and from container
@@ -163,15 +169,6 @@ docker compose rm
 ------
 ## Common issues and how to handle them
 ------
-### .dockerignore
-- works sort of like `.gitignore`
-- allows you to exclude files from context
-- worth to have one
-------
-### cache
--
-
-------
 ### leftover running containers
 ```bash
 # Remove containers for services not defined in the Compose file.
@@ -198,3 +195,4 @@ alias dcrestart='compose_file=$(ls | grep docker-compose.yml | fzf); service=$(d
 alias dk='docker kill $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  )'
 ```
 ------
+# Thanks

@@ -1,13 +1,11 @@
 FROM ruby:2.6.3
 
-RUN bundle config --global frozen 1
-RUN mkdir -p /app
-
 WORKDIR /app
 
-COPY . ./
+COPY Gemfile* ./
 RUN gem install bundler && bundle install
 
+COPY . ./
 
 ARG MESSAGE
 
